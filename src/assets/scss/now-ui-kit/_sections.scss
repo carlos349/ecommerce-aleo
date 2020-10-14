@@ -439,3 +439,39 @@
         background-color: $primary-color-alert !important;
     }
 }
+.categoryImg1{
+    background-image: url("../../../public/img/ovelores-hombres.png");
+    background-size: cover;
+}
+.sectionBorderCategory{
+    border-top: 1px solid lightgrey;
+}
+.borderBottom{
+    border-bottom: 1px solid lightgrey;
+}
+.starability-basic {
+ min-height: 0 !important;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.background-buy{
+    background-image: url("../../../public/img/card-buy.png");
+    height: 50vh;
+    background-size: cover;
+}
+.background-news{
+    background-image: url("../../../public/img/card-news.png");
+    height: 50vh;
+    background-size: cover;
+}
+.card-news{
+    background-color: rgba(255, 255, 255, 0.644);
+    border-radius: 10px;
+}
+.card-border{
+    border: 1px solid rgba(153, 148, 148, 0.281);
+}
+.iconSize{
+    font-size: 2em;
+}

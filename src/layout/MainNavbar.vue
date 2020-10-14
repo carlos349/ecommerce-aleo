@@ -41,7 +41,7 @@
           href="https://www.creative-tim.com/product/vue-now-ui-kit"
           target="_blank"
         >
-          <p>TIENDA</p>
+          <p> NOSOTROS</p>
         </a>
       </li>
       <li class="nav-item" style="padding-top:10px;margin-right:50px;">
@@ -50,7 +50,7 @@
           href="https://www.creative-tim.com/product/vue-now-ui-kit-pro"
           target="_blank"
         >
-          <p>NOSOTROS</p>
+          <p>TIENDA</p>
         </a>
       </li>
       <li class="nav-item" style="padding-top:10px;margin-right:50px;">
