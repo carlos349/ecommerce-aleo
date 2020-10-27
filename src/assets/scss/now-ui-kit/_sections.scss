@@ -475,3 +475,13 @@
 .iconSize{
     font-size: 2em;
 }
+.sf-sidebar__aside{
+    z-index: 100000 !important;
+  }
+.sf-overlay{
+    z-index: 100 !important;
+}
+.sf-sidebar--right .sf-circle-icon {
+    
+    --icon-color:#FFCB05 ;
+}

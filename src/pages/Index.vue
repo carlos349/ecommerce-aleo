@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid w-100 px-0 mt-5">
+    <div style="z-index:1" class="container-fluid w-100 px-0 mt-5">
       <el-carousel height="80vh">
         <el-carousel-item>
           <img class="d-block w-100" style="height: 80vh" src="img/banner-bg.png" alt="Second slide" />
@@ -20,7 +20,7 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-
+    
     <div class="section">
       <div class="container-fluid  px-4">
         <div class="row justify-content-md-center">
@@ -87,69 +87,40 @@
 
     <div class="section">
       <div class="container-fluid px-4">
-        <div class="row justify-content-md-center">
-            <h2 class="title text-center w-100">ULTIMOS PRODUCTOS</h2>
-            <template>
-              <tabs class="px-5 mx-5" type="primary">
-                <tab-pane class="sectionBorderCategory" label="Overoles">
-                  <div class="row container">
-                    <div v-for="(product,index) in products" :key="product" class="col-md-4">
-                      <card type="blog" plain>
-                        <div class="p-3">
-                          <img slot="image" class="img rounded img-raised" src="https://demos.creative-tim.com/vue-now-ui-kit-pro/img/project13.jpg">
-                        </div>
-                        
-                        <div class="card-body">
-                          
-                          <h5 class="card-title">
-                            <center>
-                              <template>
-                                <form class="row mx-auto borderBottom pb-0 mb-0">
-                                  <div class="col-md-8 mx-auto">
-                                    <rating class="mx-auto" :items="items" legend="" :value="value" @change="update"></rating>
-                                  </div>
-                                  <div class="col-md-4 mx-auto cursor-pointer">
-                                    <i class="fa fa-comments mx-auto"></i> +12
-                                  </div>
-                                </form>
-                                
-                              </template>
-                              <a href="#nuk">{{product.name}} </a> <br>
-                              <n-button v-popover="'popover'+index" type="primary" outline round>
-                                <i class="fa fa-cart-plus mr-2"></i> {{product.price}}
-                              </n-button>
-                              
-                              <el-popover
-                                :ref="'popover'+index"
-                                popper-class="popover"
-                                placement="bottom"
-                                width="300"
-                                trigger="hover"
-                              >
-                                <div class="popover-body text-center">
-                                  Agregar al carrito
-                                </div>
-                              </el-popover>
-                              
-                            </center>
-                            
-                          </h5>
-                        </div>
-                      </card>
-                    </div>
-                  </div>
-                  
-                </tab-pane>
-                <tab-pane label="Cascos">
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum, voluptatibus. Itaque eveniet, vel maxime accusantium repudiandae, assumenda vitae officiis commodi molestiae voluptatum a? Quas atque, doloribus magnam dolores eum eius.</p>
-                  
-                </tab-pane>
-                <tab-pane label="Accesorios">
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non, possimus blanditiis. Ipsa vel nam in explicabo itaque! Corrupti quisquam quam, reprehenderit in repellat harum temporibus, obcaecati itaque dolor earum modi.</p>
-                  
-                </tab-pane>
-              </tabs>
-            </template>
+        <div  class="row justify-content-md-center">
+           <h2 class="title text-center w-100">DESTACADOS</h2>
+           <center> 
+             <div class="row">
+                <div v-for="(product,index) in products" :key="index" class="col-md-4 mx-auto">
+                    <SfProductCard
+                      class="mx-auto"
+                      :image="product.images[0].url"
+                      :image-width="imageWidth"
+                      :image-height="imageHeight"
+                      :badge-label="badgeLabel"
+                      :badge-color="badgeColor"
+                      :title="product.name"
+                      :link="link+product._id"
+                      :link-tag="linkTag"
+                      :score-rating="3"
+                      :max-rating="5"
+                      :reviews-count="product.reviews.length"
+                      :regular-price="'$ '+formatPrice(product.price)"
+                      :special-price="specialPrice"
+                      :wishlist-icon="wishlistIcon"
+                      :is-on-wishlist-icon="isOnWishlistIcon"
+                      :is-on-wishlist="isOnWishlist"
+                      :show-add-to-cart-button="showAddToCartButton"
+                      :add-to-cart-disabled="addToCartDisabled"
+                      :is-added-to-cart="isAddedToCart"
+                      @click:is-added-to-cart="pushCart(index)"
+                      @click:wishlist="alert('@click:wishlist')"
+                      @click:add-to-cart="pushCart(index)"
+                      @click:reviews="alert('@click:reviews')"
+                    />
+                </div>
+            </div>   
+          </center>
         </div>
       </div>
     </div>
@@ -160,9 +131,9 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-8 pt-5">
-                <h2 class="card-title mt-5">Echale un vistazo a nuestros productos de calidad</h2>
-                <p class="card-text mt-5">Todo en apicultura.</p>
-                <n-button type="primary">Comprar</n-button>
+                <h2 class="card-title mt-5">Lleva ahora tu pack completo de indumentaria de apicultura.</h2>
+                <p class="card-text mt-5">Realiza tu pedido en el color que desees.</p>
+                <n-button type="primary">Cotiza ahora</n-button>
               </div>
               
             </div>
@@ -173,13 +144,14 @@
         </div>
       </div>
     </div>
+    
     <div class="section">
       <div class="container-fluid  px-4">
         <div class="row justify-content-md-center">
           <card class="card-nav-tabs text-center background-news" header-classes="card-header-warning">
             <div class="row">
               <div class="col-md-8 card-news py-5 mt-5">
-                <h2 class="card-title mt-5">Mantente al tanto de nuestras promociones</h2>
+                <h2 class="card-title mt-5">Suscríbete para recibir nuestras novedades y ofertas de productos mensualmente.</h2>
                 <fg-input class="w-50 mx-auto"  placeholder="email@ejemplo.com"></fg-input>
                 <n-button type="primary">Subscribirse</n-button>
               </div>
@@ -195,14 +167,20 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+import router from '../router'
+import endPoint from '../../config-endpoint/endpoint.js'
+import jwtDecode from 'jwt-decode' 
 import { Parallax, Card } from '@/components';
 import { Carousel, CarouselItem } from 'element-ui';
 import {FormGroupInput as FgInput} from '@/components'
 import {Tabs, TabPane} from '@/components'
 import Rating from 'vue-bulma-rating'
 import AOS from 'aos';
+import { SfProductCard } from "@storefront-ui/vue";
 import { Popover } from 'element-ui';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+import EventBus from "./components/eventBus"
 // ..
 import {
   Button
@@ -216,58 +194,102 @@ export default {
     [Popover.name]: Popover,
     [Button.name]: Button,
     Card,
-    Tabs,
-    TabPane,
-    Rating,
-    FgInput
+    FgInput,
+    SfProductCard,
   },
   data () {
     return {
       value: 4,
-      items: [
-        {
-          title: '5 Stars',
-          value: 5
-        },
-        {
-          title: '4 Stars',
-          value: 4
-        },
-        {
-          title: '3 Stars',
-          value: 3
-        },
-        {
-          title: '2 Stars',
-          value: 2
-        },
-        {
-          title: '1 Star',
-          value: 1
-        }
-      ],
-      products : [
-        {
-          name: 'overol para hombre',
-          price: '$ 100,00'
-        },
-        {
-          name: 'overol para mujer',
-          price: '$ 150,00'
-        },
-        {
-          name: 'accesorio',
-          price: '$ 120,00'
-        }
-      ]
+      configHeader: {headers:{"x-database-connect":endPoint.dataBase}},
+      products : [],
+      destacados:[],
+      image: {
+        mobile: { url: "https://storybook.storefrontui.io/assets/storybook/Home/productB.jpg" },
+        desktop: { url: "https://storybook.storefrontui.io/assets/storybook/Home/productB.jpg" },
+      },
+      imageWidth: 216,
+      imageHeight: 326,
+      badgeLabel: "",
+      badgeColor: "color-primary",
+      title: "Cotton Sweater",
+      link: "http://pruebasyswahosting2.tk/#/producto?id=",
+      linkTag: "",
+      scoreRating: 4,
+      maxRating: 7,
+      reviewsCount: 7,
+      regularPrice: "$10.99",
+      specialPrice: "",
+      wishlistIcon: "",
+      isOnWishlistIcon: "heart_fill",
+      isOnWishlist: false,
+      showAddToCartButton: true,
+      isAddedToCart: false,
+      addToCartDisabled: false,
+      ready:false
     }
+  },
+  beforeCreated(){
+   
   },
   created(){
     AOS.init();
+     this.getProduct()
   },
   methods: {
     update (val) {
       this.value = val
+    },
+    emitMethod(){
+      EventBus.$emit("addProduct", "index")
+    },
+    getProduct(){
+      axios.get(endPoint.endpointTarget+'/products/featured',this.configHeader)
+      .then(res => {
+        if (res.data.length != 0) {
+            this.products = res.data 
+
+        }
+        this.ready = true
+        
+      })
+    },
+    formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    },
+    calculateRating(rating){
+      var rat = 0
+      for (let i = 0; i < rating.length; i++) {
+        const element = rating[i];
+        rat = rat + element.rating
+      }
+      rat = (rat / 5)
+      console.log(rat) 
+    },
+    pushCart(i){
+      if (localStorage.cart) {
+        const data = JSON.parse(localStorage.cart)
+        data.push({id:data.length,name:this.products[i].name,qty:1,image:this.products[i].images[0].url})
+        localStorage.setItem("cart", JSON.stringify(data))
+      }
+      else{
+        localStorage.setItem("cart",JSON.stringify([{id:0,name:this.products[i].name,qty:1,image:this.products[i].images[0].url}]))
+      }
+      this.$swal({
+          type: 'success',
+          icon: 'success',
+          toast: true,
+          position: 'top-end',
+          timer: 3000,
+          timerProgressBar: true,
+          title: 'Agregado a cotizaciones',
+          showConfirmButton: false,
+          didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+      this.emitMethod()
     }
   }
 };

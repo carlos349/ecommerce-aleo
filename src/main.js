@@ -19,10 +19,13 @@ import App from './App.vue';
 // You can change this import to `import router from './starterRouter'` to quickly start development from a blank layout.
 import router from './router';
 import NowUiKit from './plugins/now-ui-kit';
-
+import "@storefront-ui/vue/styles.scss";
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.config.productionTip = false;
 
 Vue.use(NowUiKit);
+Vue.use(VueSweetalert2);
 
 new Vue({
   router,

@@ -6,6 +6,7 @@ import Register from './pages/Register.vue';
 import About from './pages/About.vue';
 import Contact from './pages/Contact.vue';
 import Products from './pages/Products.vue';
+import checkout from './pages/checkout.vue';
 import SingleProduct from './pages/SingleProduct.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
@@ -44,7 +45,7 @@ export default new Router({
     {
       path: '/registro',
       name: 'register',
-      components: { default: Register, header: MainNavbar },
+      components: { default: Register, header: MainNavbar ,footer: MainFooter},
       props: {
         header: { colorOnScroll: 200 }
       }
@@ -52,7 +53,7 @@ export default new Router({
     {
       path: '/nosotros',
       name: 'about',
-      components: { default: About, header: MainNavbar },
+      components: { default: About, header: MainNavbar,footer: MainFooter },
       props: {
         header: { colorOnScroll: 200 }
       }
@@ -60,15 +61,15 @@ export default new Router({
     {
       path: '/contacto',
       name: 'contact',
-      components: { default: Contact, header: MainNavbar },
+      components: { default: Contact, header: MainNavbar,footer: MainFooter },
       props: {
         header: { colorOnScroll: 200 }
       }
     },
     {
-      path: '/tienda',
+      path: '/products',
       name: 'products',
-      components: { default: Products, header: MainNavbar },
+      components: { default: Products, header: MainNavbar,footer: MainFooter },
       props: {
         header: { colorOnScroll: 200 }
       }
@@ -76,7 +77,15 @@ export default new Router({
     {
       path: '/producto',
       name: 'singleProduct',
-      components: { default: SingleProduct, header: MainNavbar },
+      components: { default: SingleProduct, header: MainNavbar,footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 200 }
+      }
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      components: { default: checkout, header: MainNavbar,footer: MainFooter },
       props: {
         header: { colorOnScroll: 200 }
       }
