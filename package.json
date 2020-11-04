@@ -19,6 +19,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "jwt-decode": "^3.0.0",
     "nouislider": "^14.6.0",
+    "os": "^0.1.1",
     "vb-rating": "^1.0.3",
     "vue": "^2.6.11",
     "vue-bulma-rating": "^1.0.1",

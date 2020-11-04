@@ -1,25 +1,27 @@
 <template>
-  <div class="section estePs" style="background-image: url('img/intro.jpg');margin-top:-170px;">
-    <div class="container">
+  <div class="section estePs" style="background-image: url('img/intro.png');margin-top:-170px;background-repeat:no-repeat">
+    <div style="margin-top: 14rem !important;" class="container">
+      <h2 class="fontTwo text-center text-white col-4 mx-auto bgLetters" style="letter-spacing:.2em;margin-top:100px;">NOSOTROS</h2>
         <div class="row justify-content-end">
-          <div class="col-md-6">
-            <h2 data-aos="fade-up" class="opacity-cero titlesPrada">K&K PRETTY NAILS</h2>
+          <div class="col-md-6 text-white bgLetters">
+            <br><br>
+            <h2 data-aos="fade-up" class="opacity-cero titlesPrada">Creaciones apicolas aleo</h2>
             <p data-aos="fade-up" class="textparra-color" style="line-height: 1.6;" >
-            Lo que comenzó como un hobby se fue convirtiendo en una profesión para nuestra fundadora Katriel Capacho, por lo que el 24 de abril de 2019 decidimos llevar esto al siguiente nivel creando un local en el cual nos dedicamos no sólo al embellecimiento de las uñas sino al cuidado de ellas.
+            Somos una empresa dedicada a la fabricación de overoles apícolas, con amplia experiencia en el área. 
             <br><br>
-            Desde el principio nuestra prioridad es que tu visita a nuestro establecimiento sea una experiencia agradable y única, con atención personalizada y asesorías en el bienestar de tus uñas, y es que más allá de la belleza que consigas en el mantenimiento mensual, es fundamental el cuidado para que se conserven sanas y fuertes.
+            Iniciamos originalmente en Perú, en la ciudad de Lima fabricando overoles apícolas e indumentaria apícola en material de acero inoxidable y galvanizado, productos como ahumadores, centrifugas de 3 y 4 marcos, filtros de acero, recuperadoras de miel en acero, entre otros.
             <br><br>
-            Nuestro estándar de calidad lo medimos en base al resultado del servicio, donde el trabajo y atención sea lo más importante.
+            Posteriormente decidimos establecernos aquí en Colombia iniciando con la confección de overoles apícolas en diferentes tipos de careta como tipo esgrima o sombreros flexibles y 360°.
             <br>  <br>
-            Cuidamos cada detalle minuciosamente desde la atención al cliente hasta los servicios y que la experiencia sea inolvidable para cada una de ustedes.
+            Guantes apícolas, caretas simples y chaquetas apícolas. Próximamente incluiremos productos fabricados en material de acero inoxidable y galvanizado para completar toda la indumentario del apicultor. 
             <br><br>
-            Es por esto y muchas razones más que en K&K Pretty Nails hacemos nuestro trabajo con cariño y buscamos cada día profesionalizar más y garantizar que cada minuto en nuestro local sea satisfactorio.
+            Los valores que nos definen como empresa son:
             </p>
-            <p data-aos="fade-up" class="items-about mt-5"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Perfeccionismo </p>
+            <p data-aos="fade-up" class="items-about mt-4"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Eficiencia </p>
             <p data-aos="fade-up" class="items-about"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Empatía </p>
             <p data-aos="fade-up" class="items-about"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Amabilidad </p>
             <p data-aos="fade-up" class="items-about"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Profesionalismo </p>
-            <p data-aos="fade-up" class="items-about"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Eficacia </p>
+            <p data-aos="fade-up" class="items-about"><i class="now-ui-icons ui-1_check" style="margin-right:10px;"></i> Responsabilidad </p>
           </div>
         </div>
       </div>
@@ -39,3 +41,9 @@ export default {
     }
 };
 </script>
+<style >
+.bgLetters{
+  background-color: #5b1c0096;
+  border-radius: 5px;
+}
+</style>

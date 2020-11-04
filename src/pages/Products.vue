@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div style="margin-top:10em">
-      <h1 class="text-center">Productos</h1>
-      
-    </div>
-    <div class="container">
+    <div class="page-header page-header-small">
+            <parallax
+                class="page-header-image"
+                style="background-image:url('img/login.jpg');"
+            >
+            </parallax>
+            <div class="container">
+                <h2 class="fontTwo" style="letter-spacing:.2em;margin-top:100px;">PRODUCTOS</h2>
+            </div>
+        </div>
+    <div class="container mt-5">
         <div class="row">
             <div  class="col-md-3 p-3 border-category">
                 <div >
@@ -32,83 +38,35 @@
             </div>
             <div class="col-md-9">
                 <div class="row mx-auto">
-                    <div class="col-md-3 mx-auto border-category">
+                    <div v-for="(filter, index) in filters" :key="filter._id" class="col-md-3 pt-1 mx-auto border-category">
                         <SfComponentSelect
-                                v-model="select1.selected"
+                                v-model="filter.active"
+                                v-on:change="makeFilter(index,filter.name)"
                                 :class="select1.customClass"
-                                :label="select1.label"
-                                :size="select1.size"
-                                :required="select1.required"
-                                :valid="select1.valid"
-                                :disabled="select1.disabled"
+                                :label="filter.name"
+                                :size="5"
+                                :required="false"
+                                :valid="true"
+                                :disabled="false"
                                 :error-message="select1.errorMessage"
                                 :persistent="select1.persistent"
                                 style="max-width: 30rem;"
                             >
                             <SfComponentSelectOption
-                            v-for="(option, key) in select1.options"
+                            v-for="(option, key) in filter.options"
                             :key="key"
-                            :value="option.value"
+                            :value="option.name"
+                            
                             >
                             <SfProductOption
-                                :color="option.color"
-                                :label="option.label"
-                            ></SfProductOption>
-                            </SfComponentSelectOption>
-                        </SfComponentSelect>
-                    </div>
-                    <div class="col-md-3 mx-auto border-category">
-                        <SfComponentSelect
-                                v-model="select1.selected"
-                                :class="select1.customClass"
-                                :label="select1.label"
-                                :size="select1.size"
-                                :required="select1.required"
-                                :valid="select1.valid"
-                                :disabled="select1.disabled"
-                                :error-message="select1.errorMessage"
-                                :persistent="select1.persistent"
-                                style="max-width: 30rem;"
-                            >
-                            <SfComponentSelectOption
-                            v-for="(option, key) in select1.options"
-                            :key="key"
-                            :value="option.value"
-                            >
-                            <SfProductOption
-                                :color="option.color"
-                                :label="option.label"
-                            ></SfProductOption>
-                            </SfComponentSelectOption>
-                        </SfComponentSelect>
-                    </div>
-                    <div class="col-md-3 mx-auto border-category">
-                        <SfComponentSelect
-                                v-model="select1.selected"
-                                :class="select1.customClass"
-                                :label="select1.label"
-                                :size="select1.size"
-                                :required="select1.required"
-                                :valid="select1.valid"
-                                :disabled="select1.disabled"
-                                :error-message="select1.errorMessage"
-                                :persistent="select1.persistent"
-                                style="max-width: 30rem;"
-                            >
-                            <SfComponentSelectOption
-                            v-for="(option, key) in select1.options"
-                            :key="key"
-                            :value="option.value"
-                            >
-                            <SfProductOption
-                                :color="option.color"
-                                :label="option.label"
+                                :color="''"
+                                :label="option.name"
                             ></SfProductOption>
                             </SfComponentSelectOption>
                         </SfComponentSelect>
                     </div>
                 </div>
-                <div class="row pl-4 mx-auto pt-4">
+                <div class="row pl-4 mt-5 mx-auto pt-4">
                     <SfProductCard
                         v-for="(prod, index) in actualProducts"
                         :key="prod._id"
@@ -186,6 +144,7 @@ export default {
         persistent: false,
       },
       products:[],
+      filters:[],
       actualProducts:[],
       product:{
           image: {
@@ -197,7 +156,7 @@ export default {
             badgeLabel: "",
             badgeColor: "color-primary",
             title: "Cotton Sweater",
-            link: 'http://pruebasyswahosting2.tk/#/producto?id=',
+            link: '/producto?id=',
             linkTag: "",
             scoreRating: 4.5,
             maxRating: 5,
@@ -215,7 +174,7 @@ export default {
     
   },
   created(){
-        
+        this.getFilter()
         this.getCategories()
         this.getProducts()
     },
@@ -228,8 +187,16 @@ export default {
                     this.categories = res.data 
                     
                 }
-                this.categories.forEach((item) => item.push({selected:false}))
+                this.categories.forEach((item) => item.selected = false)
                 
+            })
+        },
+        getFilter(){
+            axios.get(endPoint.endpointTarget+'/filters',this.configHeader)
+            .then(res => {
+                if (res.data.length != 0) {
+                    this.filters = res.data 
+                }
             })
         },
         emitMethod(){
@@ -250,6 +217,7 @@ export default {
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         },
         changeCategory(name,active,i){
+            this.filters.forEach((item) => item.active = false)
             this.actualProducts = []
             if (name == 'todos' ) {
                 this.getCategories()
@@ -276,13 +244,26 @@ export default {
             }
         },
         pushCart(i){
+            var validation = true
             if (localStorage.cart) {
                 const data = JSON.parse(localStorage.cart)
-                data.push({id:data.length,name:this.actualProducts[i].name,qty:1,image:this.actualProducts[i].images[0].url})
+                for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                if (element.idProduct == this.actualProducts[i]._id) {
+                    element.qty ++
+                    localStorage.setItem("cart", JSON.stringify(data))
+                    validation = false
+                    break
+                }
+                }
+                if (validation) {
+                data.push({id:data.length,name:this.actualProducts[i].name,qty:1,image:this.actualProducts[i].images[0].url,idProduct:this.actualProducts[i]._id,data:this.actualProducts[i].category})
                 localStorage.setItem("cart", JSON.stringify(data))
+                }
+                
             }
             else{
-                localStorage.setItem("cart",JSON.stringify([{id:0,name:this.actualProducts[i].name,qty:1,image:this.actualProducts[i].images[0].url}]))
+                localStorage.setItem("cart",JSON.stringify([{id:0,name:this.actualProducts[i].name,qty:1,image:this.actualProducts[i].images[0].url,idProduct:this.actualProducts[i]._id,data:this.actualProducts[i].category}]))
             }
             this.$swal({
                 type: 'success',
@@ -299,10 +280,36 @@ export default {
                 }
             })
             this.emitMethod()
+        },
+        makeFilter(i,name){
+            var products = []
+            for (let index = 0; index < this.filters.length; index++) {
+                const element = this.filters[index];
+                if (index != i) {
+                    element.options.active = false
+                }
+            }
+            
+            for (let e = 0; e < this.actualProducts.length; e++) {
+                const element = this.actualProducts[e];
+                for (let c = 0; c < element.filters.length; c++) {
+                    const filt = element.filters[c];
+                    if (filt.name == name) {
+                        for (let t = 0; t < filt.options.length; t++) {
+                            const opt = filt.options[t];
+                            console.log(this.filters[i].active)
+                            if (opt == this.filters[i].active) {
+                                console.log(element)
+                                products.push(element)
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+            this.actualProducts = products
         }
-
-    }
-    
+    } 
 };
 </script>
 <style>
@@ -349,5 +356,8 @@ export default {
     }
     .sf-rating__icon {
         --icon-color: #FFCB05;
+    }
+    .sf-component-select {
+        padding-top: 5px !important;
     }
 </style>

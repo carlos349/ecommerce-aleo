@@ -50,7 +50,7 @@
               </div>
             </template>
           </card>
-          <card v-else type="login" plain>
+          <card class="registerForm" v-else type="login" plain>
             <div slot="header" class="logo-container">
               <img v-lazy="'img/logo.png'" alt="" />
             </div>
@@ -126,6 +126,7 @@ import axios from 'axios'
 import router from '../router'
 import endPoint from '../../config-endpoint/endpoint.js'
 import jwtDecode from 'jwt-decode'
+import EventBus from "./components/eventBus"
 
 export default {
   name: 'login-page',
@@ -154,7 +155,10 @@ export default {
     registerClient() {
       var valid = false
       if (this.dataRegister.email.includes("@")) {
-        valid = true
+        if (this.dataRegister.email.split("@")[1].includes(".")) {
+          valid = true
+        }
+        
       }
       else{
         this.$swal({
@@ -286,10 +290,11 @@ export default {
                       }
                   })
                   localStorage.setItem("status","log-in")
-                  localStorage.setItem("clientMail",this.mail)
+                  localStorage.setItem("clientMail",this.email.toLowerCase())
                   localStorage.setItem("clientName",res.data.name)
                   localStorage.setItem("clientlastName",res.data.lastName)
                   localStorage.setItem("clientId",res.data.id)
+                  EventBus.$emit("addProduct", "products")
                   router.push("/")
               }
               if (res.data.status == 'client incorrect') {

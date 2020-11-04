@@ -12,7 +12,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <h5 style="color: black;font-weight:700;">Creaciones apícolas ALEO</h5>
+        <h5 class="fontTwo"  style="color: black;font-weight:400;">Creaciones apícolas ALEO</h5>
         <p style="color:black">Seguridad y Confianza.</p>
         <ul class="ftco-footer-social float-lft list-unstyled">
           <li>
@@ -33,7 +33,7 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h5 style="color: black;font-weight:700;">Enlaces populares</h5>
+        <h5  style="color: black;font-weight:700;">Enlaces populares</h5>
         <ul class="list-unstyled linksFooter fast-links" style="display:block;font-size:17px">
           <li class="w-100">
             <router-link to="/nosotros">
@@ -43,7 +43,7 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h5 style="color: black;font-weight:700;">Enlaces rápidos</h5>
+        <h5   style="color: black;font-weight:700;">Enlaces rápidos</h5>
         <ul class="list-unstyled linksFooter fast-links" style="display:block;font-size:17px">
           <li class="w-100">
             <router-link to="/nosotros">
@@ -70,7 +70,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 p-0">
         <h5 style="color: black;font-weight:700;">Contáctanos</h5>
         <ul class="list-unstyled fast-links" style="display:block">
           <li class="w-100">
@@ -82,7 +82,7 @@
             <a href="https://wa.me/56972628949" target="_blank">+57 317 4635202</a>
           </li>
           <li class="w-100">
-            <i class="fa fa-envelope" style="color:black;font-size:16px;margin-right:10px;"></i>
+            <i class="fa fa-envelope" style="color:black;font-size:11px;"></i>
             <a href="mailto:creacionesapicolasaleo@gmail.com" target="_blank">creacionesapicolasaleo@gmail.com</a>
           </li>
         </ul>
@@ -111,12 +111,13 @@ export default {
 </script>
 <style>
   .footer{
-    margin-top: 10%;
-    background-color: #d9c79f !important;
+    
+    background-color: #ffcb05!important;
     color:#42210B
   }
   footer ul li a{
-    font-size: 13px !important;
+    font-size: 16px !important;
+    color:#42210B !important
   }
   .ftco-footer-social li a {
     height: 40px;
@@ -131,6 +132,7 @@ export default {
 .wsPos{
   bottom: 2%;
   position: fixed;
-  
+  z-index: 100;
 }
+
 </style>

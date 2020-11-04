@@ -5,7 +5,7 @@
         <el-carousel-item>
           <img class="d-block w-100" style="height: 80vh" src="img/banner-bg.png" alt="Second slide" />
           <div data-aos="fade-left" data-aos-offset="400" data-aos-easing="ease-in-sine" class="carousel-caption-style">
-            <h3>Seguridad y confianza para tu empresa.</h3>
+            <h3 class="fontTwo">Seguridad y confianza para tu empresa.</h3>
             <h6>Todo lo que necesitas en apicultura</h6>
             <n-button type="primary">Está aquí</n-button>
           </div>
@@ -13,71 +13,77 @@
         <el-carousel-item>
           <img class="d-block w-100" style="height: 80vh" src="img/banner-bg.png" alt="Second slide" />
           <div data-aos="fade-left" data-aos-offset="400" data-aos-easing="ease-in-sine" class="carousel-caption-style">
-            <h3>Seguridad y confianza para tu empresa.</h3>
+            <h3 class="fontTwo">Seguridad y confianza para tu empresa.</h3>
             <h6>Todo lo que necesitas en apicultura</h6>
             <n-button type="primary" round>Está aquí</n-button>
           </div>
         </el-carousel-item>
       </el-carousel>
     </div>
-    
-    <div class="section">
-      <div class="container-fluid  px-4">
-        <div class="row justify-content-md-center">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="card-border p-5">
-                <center>
-                  <i class="now-ui-icons files_paper mx-auto iconSize"></i> <br> <h4>Políticas de garantía</h4> 
-                </center>
-                
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card-border p-5">
-                <center>
-                  <i class="now-ui-icons files_box mx-auto iconSize"></i> <br> <h4>Despacho <br><br> </h4> 
-                </center>
-                
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card-border p-5">
-                <center>
-                  <i class="now-ui-icons users_circle-08 mx-auto iconSize"></i> <br> <h4>Contacto <br><br> </h4> 
-                </center>
-                
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card-border p-5">
-                <center>
-                  <i class="now-ui-icons business_money-coins mx-auto iconSize"></i> <br> <h4>Tipos de pago</h4> 
-                </center>
-                
-              </div>
-            </div>
-          </div>
-        </div>
+
+    <modal :show.sync="modals.policity"
+             class="modal-primary"
+             :show-close="false"
+             header-classes="justify-content-center"
+             type="mini">
+      <div slot="header" class="modal-profile d-flex justify-content-center align-items-center">
+        <i class="now-ui-icons files_paper"></i>
       </div>
-    </div>
+      <h4 class="fontTwo">Politicas de garantía</h4>
+      <p>Garantía 3 meses por defecto de fabricación una vez entregado el producto.</p>
+      <template slot="footer">
+        <n-button type="neutral" link @click.native="modals.policity = false">Entendido</n-button>
+      </template>
+    </modal>
+
+    <modal :show.sync="modals.despach"
+             class="modal-primary"
+             :show-close="false"
+             header-classes="justify-content-center"
+             type="mini">
+      <div slot="header" class="modal-profile d-flex justify-content-center align-items-center">
+        <i class="now-ui-icons files_box mx-auto"></i>
+      </div>
+      <h4 class="fontTwo text-center">Despacho</h4>
+      <p>Se hacen envíos a toda Colombia con costo de despacho adicional dependiendo de la cantidad solicitada y la provincia de entrega. Envío por medio de Interrapidisimo, Servientrega, Envía, Coordinadora o Deprisa.</p>
+      <template slot="footer">
+        <n-button type="neutral" link @click.native="modals.despach = false">Entendido</n-button>
+      </template>
+    </modal>
+
+    <modal :show.sync="modals.pay"
+             class="modal-primary"
+             :show-close="false"
+             header-classes="justify-content-center"
+             type="mini">
+      <div slot="header" class="modal-profile d-flex justify-content-center align-items-center">
+        <i class="now-ui-icons business_money-coins"></i>
+      </div>
+      <h4 class="fontTwo text-center">Tipos de pago</h4>
+      <p>Una vez aprobada la cotización y comprometida la fecha de entrega, se realiza el pago por consignación a cuentas Bancolombia, Nequi o Efecty. Posteriormente se envía el producto.</p>
+      <template slot="footer">
+        <n-button type="neutral" link @click.native="modals.pay = false">Entendido</n-button>
+      </template>
+    </modal>
+    
+    
 
     <div class="section">
       <div class="container-fluid px-4">
         <div class="row justify-content-md-center">
-            <h2 class="title text-center w-100">COMPRA POR CATEGORÍAS</h2>
+            <h2 class="title fontTwo text-center w-100">COMPRA POR CATEGORÍAS</h2>
             <div class="col-md-4 ">
               <card class="w-100 cursor-pointer categoryImg1" style="height:35vh;">
                 <h4 class="text-right mt-5">Overoles para<br> caballeros</h4>
               </card>
             </div>
             <div class="col-md-4">
-              <card class="w-100 cursor-pointer" style="height:35vh;">
+              <card class="w-100 cursor-pointer categoryImg3" style="height:35vh;">
                 <h4 class="text-right mt-5">Accesorios</h4>
               </card>
             </div>
             <div class="col-md-4">
-              <card class="w-100 cursor-pointer" style="height:35vh;">
+              <card class="w-100 cursor-pointer categoryImg2" style="height:35vh;">
                 <h4 class="text-right mt-5">Overoles para<br> damas</h4>
               </card>
             </div>
@@ -88,9 +94,10 @@
     <div class="section">
       <div class="container-fluid px-4">
         <div  class="row justify-content-md-center">
-           <h2 class="title text-center w-100">DESTACADOS</h2>
+           <h2 class="title fontTwo text-center w-100">DESTACADOS</h2>
            <center> 
              <div class="row">
+               
                 <div v-for="(product,index) in products" :key="index" class="col-md-4 mx-auto">
                     <SfProductCard
                       class="mx-auto"
@@ -125,7 +132,7 @@
       </div>
     </div>
     <div class="section">
-      <div class="container-fluid  px-4">
+      <div class="container-fluid">
         <div class="row justify-content-md-center">
           <card class="card-nav-tabs text-center background-buy" header-classes="card-header-warning">
             <div class="row">
@@ -144,13 +151,51 @@
         </div>
       </div>
     </div>
-    
     <div class="section">
       <div class="container-fluid  px-4">
         <div class="row justify-content-md-center">
-          <card class="card-nav-tabs text-center background-news" header-classes="card-header-warning">
+          <div class="row">
+            <div v-on:click="modals.policity = true" class="col-md-3 cursor-pointer">
+              <div class="card-border p-5">
+                <center>
+                  <i class="now-ui-icons files_paper mx-auto iconSize"></i> <br> <h4>Políticas de garantía</h4> 
+                </center>
+                
+              </div>
+            </div>
+            <div v-on:click="modals.despach = true" class="col-md-3 cursor-pointer">
+              <div class="card-border p-5">
+                <center>
+                  <i class="now-ui-icons files_box mx-auto iconSize"></i> <br> <h4>Despacho <br><br> </h4> 
+                </center>
+                
+              </div>
+            </div>
+            <div v-on:click="pushContact()" class="col-md-3 cursor-pointer">
+              <div class="card-border p-5">
+                <center>
+                  <i class="now-ui-icons users_circle-08 mx-auto iconSize"></i> <br> <h4>Contacto <br><br> </h4> 
+                </center>
+              </div>
+            </div>
+            <div v-on:click="modals.pay = true" class="col-md-3 cursor-pointer">
+              <div class="card-border p-5">
+                <center>
+                  <i class="now-ui-icons business_money-coins mx-auto iconSize"></i> <br> <h4>Tipos de pago <br><br> </h4> 
+                </center>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section pb-0">
+      <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <card class="card-nav-tabs text-center background-news mb-0 pb-5" header-classes="card-header-warning">
             <div class="row">
-              <div class="col-md-8 card-news py-5 mt-5">
+              <div class="col-md-8 card-news py-5">
                 <h2 class="card-title mt-5">Suscríbete para recibir nuestras novedades y ofertas de productos mensualmente.</h2>
                 <fg-input class="w-50 mx-auto"  placeholder="email@ejemplo.com"></fg-input>
                 <n-button type="primary">Subscribirse</n-button>
@@ -181,6 +226,7 @@ import { SfProductCard } from "@storefront-ui/vue";
 import { Popover } from 'element-ui';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import EventBus from "./components/eventBus"
+import {Modal} from '@/components'
 // ..
 import {
   Button
@@ -196,9 +242,15 @@ export default {
     Card,
     FgInput,
     SfProductCard,
+    Modal
   },
   data () {
     return {
+      modals:{
+        policity:false,
+        despach:false,
+        pay:false
+      },
       value: 4,
       configHeader: {headers:{"x-database-connect":endPoint.dataBase}},
       products : [],
@@ -212,7 +264,7 @@ export default {
       badgeLabel: "",
       badgeColor: "color-primary",
       title: "Cotton Sweater",
-      link: "http://pruebasyswahosting2.tk/#/producto?id=",
+      link: "/producto?id=",
       linkTag: "",
       scoreRating: 4,
       maxRating: 7,
@@ -267,13 +319,26 @@ export default {
       console.log(rat) 
     },
     pushCart(i){
+      var validation = true
       if (localStorage.cart) {
         const data = JSON.parse(localStorage.cart)
-        data.push({id:data.length,name:this.products[i].name,qty:1,image:this.products[i].images[0].url})
-        localStorage.setItem("cart", JSON.stringify(data))
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index];
+          if (element.idProduct == this.products[i]._id) {
+            element.qty ++
+            localStorage.setItem("cart", JSON.stringify(data))
+            validation = false
+            break
+          }
+        }
+        if (validation) {
+          data.push({id:data.length,name:this.products[i].name,qty:1,image:this.products[i].images[0].url,idProduct:this.products[i]._id,data:this.products[i].category})
+          localStorage.setItem("cart", JSON.stringify(data))
+        }
+        
       }
       else{
-        localStorage.setItem("cart",JSON.stringify([{id:0,name:this.products[i].name,qty:1,image:this.products[i].images[0].url}]))
+        localStorage.setItem("cart",JSON.stringify([{id:0,name:this.products[i].name,qty:1,image:this.products[i].images[0].url,idProduct:this.products[i]._id,data:this.products[i].category}]))
       }
       this.$swal({
           type: 'success',
@@ -290,6 +355,9 @@ export default {
           }
       })
       this.emitMethod()
+    },
+    pushContact(){
+      router.push("/contacto")
     }
   }
 };

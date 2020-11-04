@@ -443,6 +443,14 @@
     background-image: url("../../../public/img/ovelores-hombres.png");
     background-size: cover;
 }
+.categoryImg2{
+    background-image: url("../../../public/img/mujeres.png");
+    background-size: cover;
+}
+.categoryImg3{
+    background-image: url("../../../public/img/accesorios.png");
+    background-size: cover;
+}
 .sectionBorderCategory{
     border-top: 1px solid lightgrey;
 }
@@ -484,4 +492,25 @@
 .sf-sidebar--right .sf-circle-icon {
     
     --icon-color:#FFCB05 ;
+}
+.fontTwo{
+    font-family: 'burfordrusticrudeonebregular', Arial, sans-serif;
+    font-weight: 400 !important;
+}
+.sf-checkbox.is-active {
+    --checkbox-border-color:  #ffcb05;
+    --checkbox-background: #ffcb05;
+    border: none !important;
+}
+.sf-quantity-selector {
+    background: #ffcb05;
+}
+.form-group.no-border.input-lg .input-group-text, .input-group.no-border.input-lg .input-group-text {
+    padding: 15px 10px 15px 19px;
+}
+.login-page .card-login .input-group:last-child {
+    margin-bottom: 20px;
+}
+.no-icon{
+    font-size: 16px !important;
 }

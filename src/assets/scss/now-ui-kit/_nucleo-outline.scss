@@ -16,6 +16,27 @@ Created using IcoMoon - icomoon.io
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'burfordrusticrudeonebregular';
+  src: url('../fonts/burfordrusticextrudetwo-webfont.eot');
+  src: url('../fonts/burfordrusticextrudetwo-webfont.eot') format('embedded-opentype'),
+  url('../fonts/burfordrusticextrudetwo-webfont.woff2') format('woff2'),
+  url('../fonts/burfordrusticextrudetwo-webfont.woff') format('woff'),
+  url('../fonts/burfordrusticextrudetwo-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'burfordrusticinlineregular';
+  src: url('../fonts/burfordrusticinline-regular2-webfont.eot');
+  src: url('../fonts/burfordrusticinline-regular2-webfont.eot') format('embedded-opentype'),
+  url('../fonts/burfordrusticinline-regular2-webfont.woff2') format('woff2'),
+  url('../fonts/burfordrusticinline-regular2-webfont.woff') format('woff'),
+  url('../fonts/burfordrusticinline-regular2-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /*------------------------
 	base class definition

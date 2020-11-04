@@ -57,7 +57,7 @@
       <li class="nav-item">
         <div v-if="status == 'log-in'">
           <drop-down class="mt-2" tag="div" :title="name + ' ' + lastName">
-            <a style="cursor:pointer" class="dropdown-item">Historial de cotizaciones</a>
+            <a style="cursor:pointer" @click="modals.large = true" class="dropdown-item">Historial de cotizaciones</a>
             <a @click="closeSession()" style="cursor:pointer" class="dropdown-item">Cerrar sesión</a>
           </drop-down>
         </div>
@@ -72,6 +72,41 @@
     </template>
     
   </navbar>
+  <modal :show.sync="modals.large"
+        modal-classes="modal-lg"
+        header-classes="justify-content-center">
+        <h4>Historial de cotizaciones</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cantidad de productos</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+              
+            </tbody>
+          </table>
+  </modal>
   <SfSidebar
       :visible="isSidebarOpen"
       @close="isSidebarOpen = false"
@@ -93,7 +128,7 @@
         :image-width="imageWidth"
         :image-height="imageHeight"
         :title="product.name"
-        :regular-price="''"
+        :regular-price="'Categoria:'+product.data"
         :special-price="specialPrice"
         @click:remove="deleteProduct(index)"
       >
@@ -121,9 +156,7 @@
           <SfMenuItem :label="'Total'" :count="2" />
         </SfListItem>
       </SfList> -->
-      <router-link v-if="products.length > 0"   to="/checkout" class="nav-link">
-        <n-button type="primary" class="w-100" v-on:click="isSidebarOpen = false" round>Cotizar</n-button>
-      </router-link>
+      <n-button v-if="products.length > 0" type="primary" class="w-100" v-on:click="isSidebarOpen = false, goCheck()" round>Cotizar</n-button>
         
     </SfSidebar>
 </div>
@@ -138,6 +171,9 @@ import { Popover } from 'element-ui';
 import { SfSidebar } from "@storefront-ui/vue";
 import { SfCollectedProduct } from "@storefront-ui/vue";
 import EventBus from "../pages/components/eventBus"
+var os = require('os');
+import {Modal} from '@/components'
+
 export default {
   name: 'main-navbar',
   props: {
@@ -151,10 +187,12 @@ export default {
     [Button.name]: Button,
     SfSidebar,
     SfCollectedProduct,
-    [Badge.name]: Badge
+    [Badge.name]: Badge,
+    Modal
   },
   data(){
     return {
+      modals:{large:false},
       isSidebarOpen: false,
       subtitle: "",
       headingLevel: 3,
@@ -180,13 +218,22 @@ export default {
         getCart(){
           if (localStorage.clientName) {
             this.name = localStorage.clientName
+          }else{
+            this.name = ''
           }
+
           if (localStorage.status) {
             this.status = localStorage.status
+          }else{
+            this.status = ''
           }
+
           if (localStorage.clientlastName) {
             this.lastName = localStorage.clientlastName
+          }else{
+            this.lastName = ''
           }
+
           if (localStorage.cart) {
             this.products = JSON.parse(localStorage.cart)
           }
@@ -217,13 +264,59 @@ export default {
           })
         },
         closeSession(){
+          this.$swal({
+              type: 'success',
+              icon: 'success',
+              toast: true,
+              position: 'top-end',
+              timer: 3000,
+              timerProgressBar: true,
+              title: 'Has cerrado sesión',
+              showConfirmButton: false,
+              didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+          })
           localStorage.removeItem("status")
           localStorage.removeItem("clientMail")
           localStorage.removeItem("clientName")
           localStorage.removeItem("clientlastName")
           localStorage.removeItem("clientId")
           router.push("/")
+          this.getCart()
+        },
+        arrayData(data){
+          var better = ''
+          for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+            better = better + os.EOL + element.name + ': ' + element.data
+          }
+          return better
+        },
+        goCheck(){
+          if (this.status == "log-in") {
+            router.push("/checkout")
+          }
+          else{
+            this.$swal({
+                type: 'error',
+                icon: 'error',
+                timer: 2000,
+                timerProgressBar: true,
+                title: 'Debes iniciar sesión',
+                showConfirmButton: false,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            setTimeout(() => {
+              router.push("/ingreso")
+            }, 2100);
+          }
         }
+        
     },
     mounted() {
       EventBus.$on("addProduct",status => {
